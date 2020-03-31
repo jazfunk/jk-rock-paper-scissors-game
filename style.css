@@ -29,11 +29,19 @@ h2 {
     text-align: center;
     padding: 8px 4px;    
 }
-.main-table {    
+.game-table {
     width: 83%;
+    border: 2px solid;
+    background-color: #ffffff;
+    /* height: 50vh; */
+}
+
+}
+.main-table {    
+    /* width: 83%; */
     /* border: 2px solid; */
     background-color: #ffffff;
-    height: 83vh;
+    /* height: 83vh; */
 }
 .main-cell {
     text-align: center;
@@ -41,12 +49,43 @@ h2 {
     background-color: #f4f4f4;
     padding: 3px;
     margin: 5px;  
-    /* object-fit: cover;   */
+    
 }
 .main-cell > img {    
+    width: 75px;
+    height: 75px;
+    /* transform: scaleX(-1); */    
+}
+.game-cell {
+    text-align: center;
+    /* border: 1px solid; */
+    background-color: #f4f4f4;
+    padding: 3px;
+    margin: 5px;  
+}
+.game-cell > img {
+    width: 75px;
+    height: 75px;
+}
+.game-cell-result {
+    text-align: center;
+    background-color: #f4f4f4;
+    padding: 3px;
+    margin: 5px;  
+}
+.game-cell-result > img {
     width: 100px;
     height: 100px;
-    /* transform: scaleX(-1); */
+}
+.ai-game-result > img {
+    width: 100px;
+    height: 100px;  
+    transform: scaleX(-1);  
+}
+.ai-game-span > img {
+    width: 75px;
+    height: 75px;
+    transform: scaleX(-1);
 }
 .ai-player > td > img {
     transform: scaleX(-1);
