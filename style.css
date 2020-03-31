@@ -61,7 +61,11 @@ h2 {
     /* border: 1px solid; */
     background-color: #f4f4f4;
     padding: 3px;
-    margin: 5px;  
+    margin: 5px;     
+    /* background-image: url("images/fist.png");  */
+    /* background: url(images/fist.png);
+    background-repeat: no-repeat;
+    background-size: 50%; */
 }
 .game-cell > img {
     width: 75px;
