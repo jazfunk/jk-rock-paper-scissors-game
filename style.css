@@ -30,6 +30,14 @@ h2 {
     text-align: center;
     padding: 8px 4px;    
 }
+h3 {
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f4f4f4;
+    text-align: center;
+    padding-top: 1px;
+    padding-bottom: 4px;
+}
 .game-table {
     width: 83%;
     border: 2px solid;

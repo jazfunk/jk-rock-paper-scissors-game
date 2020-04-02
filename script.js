@@ -110,23 +110,31 @@ document
   .addEventListener("click", function(e) {
     e.preventDefault;    
     introRoll("user2");
-    introRoll("comp2");      
+    introRoll("comp2");  
   });
 
-  function introRoll(cell) {   
-  //  document.getElementById(cell).innerHTML = FIST_IMG;
-  //  document.getElementById("result-cell").innerText = "-------";
-  //     setTimeout(function() {
-  //       document.getElementById(cell).innerHTML = ROCK_IMG;
-  //       document.getElementById("result-cell").innerText ="ROCK!";
-  //     }, 1000);
+  // function delay() {
+  //   setTimeout(() => {
+  //     introRoll("user2");
+  //     introRoll("comp2");
+  //   }, 1000);
+  // }
 
-    for (t in tool_ids) {
-      document.getElementById(cell).innerHTML = FIST_IMG;
+  function introRoll(cell) {   
+   document.getElementById(cell).innerHTML = FIST_IMG;
+   document.getElementById("result-cell").innerText = "-------";
+  
       setTimeout(function() {
         document.getElementById(cell).innerHTML = ROCK_IMG;
-        document.getElementById("result-cell").innerText =
-          getToolName(tool_ids[t]) + "!";
+        document.getElementById("result-cell").innerText ="ROCK!";
       }, 1000);
-    }
+
+    // for (t in tool_ids) {
+    //   document.getElementById(cell).innerHTML = FIST_IMG;
+    //   setTimeout(function() {
+    //     document.getElementById(cell).innerHTML = ROCK_IMG;
+    //     document.getElementById("result-cell").innerText =
+    //       getToolName(tool_ids[t]) + "!";
+    //   }, 1000);
+    // }
   }
