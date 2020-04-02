@@ -3,12 +3,15 @@ const FIST_IMG = '<img src="images/fist.png">';
 const ROCK_IMG = '<img src="images/rock.png">';
 const PAPER_IMG = '<img src="images/paper.png">';
 const SCISSORS_IMG = '<img src="images/scissors.png">';
-
 const tool_ids = ["R", "P", "S"];
-
 var userChoice = "";
 var cpuChoice = "";
 var rule = "";
+
+window.onload = function(e) {
+  introRoll("user1");
+  introRoll("comp1");
+};
 
 document.addEventListener("keyup", keyUpHandler, false);
 
@@ -32,14 +35,26 @@ function keyUpHandler(e) {
 
 function playGame() {
   cpuChoice = getRandom(1, "PRS");
-  alert(
-    `You: ${getToolName(userChoice)}  -vs-  CPU: ${getToolName(cpuChoice)}`
-  );
+  // alert(
+  //   `You: ${getToolName(userChoice)}  -vs-  CPU: ${getToolName(cpuChoice)}`
+  // );
+  // Replaced above, with below
+  // Keeping until testing is complete
+  document.getElementById("user2").innerText = getToolName(userChoice);
+  document.getElementById("result-cell").innerText = "vs";
+  document.getElementById("comp2").innerText = getToolName(cpuChoice);
 
   var outcome = calculateWinner(userChoice + cpuChoice);
+  // outcome != "TIE"
+  //   ? alert(`${getToolName(outcome)} Wins! (${rule})`)
+  //   : alert("Tie Game");
+  // Replaced above, with below
+  // Keeping until testing is complete
   outcome != "TIE"
-    ? alert(`${getToolName(outcome)} Wins! (${rule})`)
-    : alert("Tie Game");
+    ? (document.getElementById("result-cell").innerText = `${getToolName(
+        outcome
+      )} Wins! \n${rule}`)
+    : (document.getElementById("result-cell").innerText = "Tie Game");
 }
 
 function calculateWinner(opponents) {
@@ -96,6 +111,9 @@ function getRandom(length, chars) {
   return result;
 }
 
+
+// Psuedo Code //
+// ----------- //
 // Develop "Roll"
 // Flash between fist.png and rock.png three times
 // ^--Depicting "Rock! Paper! Scissors!"
@@ -109,8 +127,8 @@ document
   .getElementById("page-action-btn")
   .addEventListener("click", function(e) {
     e.preventDefault;    
-    introRoll("user2");
-    introRoll("comp2");  
+    introRoll("user1");
+    introRoll("comp1");  
   });
 
   // function delay() {

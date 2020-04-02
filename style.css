@@ -13,7 +13,10 @@ header {
 }
 footer {
     background-color: darkslategray;
-    height: 7vh;
+    height: 75px;
+}
+a {
+    color: #999999;    
 }
 h1 {    
     font-size: 28px;
@@ -26,17 +29,21 @@ h1 {
 h2 {
     font-size: 22px;
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;    
-    color: whitesmoke;
+    color: #f4f4f4;
     text-align: center;
-    padding: 8px 4px;    
+    padding: 8px;
 }
 h3 {
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
     color: #f4f4f4;
-    text-align: center;
-    padding-top: 1px;
-    padding-bottom: 4px;
+    text-align: center; 
+}
+h4 {
+    font-size: 18px;
+    font-family: 'Courier New', Courier, monospace;
+    color: #f4f4f4;
+    text-align: center; 
 }
 .game-table {
     width: 83%;
@@ -65,24 +72,32 @@ h3 {
     /* transform: scaleX(-1); */    
 }
 .game-cell {
+    font-size: 36px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color: darkslategrey;
     text-align: center;
     /* border: 1px solid; */
     background-color: #f4f4f4;
     padding: 0px;
     margin: 0px; 
-    vertical-align: top;        
+    /* vertical-align: top;         */
     /* background-image: url("images/fist.png");  */
     /* background: url(images/fist.png);
     background-repeat: no-repeat;
     background-size: 50%; */
 }
 .ai-game-cell {
+    font-size: 36px;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    font-weight: bold;
+    color: darkslategrey;
     text-align: center;
     /* border: 1px solid; */
     background-color: #f4f4f4;
     padding: 0px;
     margin: 0px; 
-    vertical-align: top;        
+    /* vertical-align: top;         */
     /* background-image: url("images/fist.png");  */
     /* background: url(images/fist.png);
     background-repeat: no-repeat;
@@ -98,8 +113,10 @@ h3 {
     transform: scaleX(-1);
 }
 .game-cell-result {
+    width: 300px;
+    word-wrap: break-word;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 36px;
+    font-size: 28px;
     text-align: center;
     vertical-align: middle;
     background-color: #f4f4f4;
@@ -126,10 +143,14 @@ h3 {
     writing-mode: vertical-rl;
     text-orientation: upright;
 }
-.my-buttons {
-    width: 222px;
-    padding: 3px;
-    margin: 3px;
+.my-buttons {    
+    padding: 2px 22px;  
+    margin: 2px 22px; 
+    border-radius: 4px; 
+    font-size: 18px;
+    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+    color: darkslategrey;
+    box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2), 0 6px 20px 0 rgba(0,0,0,0.19);    
 }
 .my-input-text {
     width: 750px;
