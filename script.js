@@ -1,3 +1,11 @@
+const WAVE_IMG = '<img src="images/wave.png">';
+const FIST_IMG = '<img src="images/fist.png">';
+const ROCK_IMG = '<img src="images/rock.png">';
+const PAPER_IMG = '<img src="images/paper.png">';
+const SCISSORS_IMG = '<img src="images/scissors.png">';
+
+const tool_ids = ["R", "P", "S"];
+
 var userChoice = "";
 var cpuChoice = "";
 var rule = "";
@@ -88,28 +96,37 @@ function getRandom(length, chars) {
   return result;
 }
 
+// Develop "Roll"
+// Flash between fist.png and rock.png three times
+// ^--Depicting "Rock! Paper! Scissors!"
+// On the third roll, display userChoice and cpuChoice
+// Dtermine winner
+// Display winner
+// Add to total score, saved locally
+// Ablility to clear score
+
 document
   .getElementById("page-action-btn")
   .addEventListener("click", function(e) {
-    e.preventDefault;
-    var cellTarget = document.getElementById("user1").innerHTML;
-    document.getElementById("run-text").value = cellTarget;
+    e.preventDefault;    
+    introRoll("user2");
+    introRoll("comp2");      
   });
 
-document
-  .getElementById("user2")
-  .addEventListener("click", function(e) {
-    e.preventDefault;
-    var cell = e.target.parentElement;
-    var cellVerticalAlign = cell.style.verticalAlign;
-    if (cellVerticalAlign === "top" || cellVerticalAlign === "") {
-      cellVerticalAlign = "middle";
-    } else {
-      if (cellVerticalAlign === "middle") {
-        cellVerticalAlign = "bottom";
-      } else {
-        cellVerticalAlign = "top";
-      }
+  function introRoll(cell) {   
+  //  document.getElementById(cell).innerHTML = FIST_IMG;
+  //  document.getElementById("result-cell").innerText = "-------";
+  //     setTimeout(function() {
+  //       document.getElementById(cell).innerHTML = ROCK_IMG;
+  //       document.getElementById("result-cell").innerText ="ROCK!";
+  //     }, 1000);
+
+    for (t in tool_ids) {
+      document.getElementById(cell).innerHTML = FIST_IMG;
+      setTimeout(function() {
+        document.getElementById(cell).innerHTML = ROCK_IMG;
+        document.getElementById("result-cell").innerText =
+          getToolName(tool_ids[t]) + "!";
+      }, 1000);
     }
-  cell.style.verticalAlign = cellVerticalAlign;
-  });
+  }

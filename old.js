@@ -42,3 +42,25 @@
 //   }
 //   return rule;
 // }
+
+
+
+
+
+// document
+//   .getElementById("user2")
+//   .addEventListener("click", function(e) {
+//     e.preventDefault;
+//     var cell = e.target.parentElement;
+//     var cellVerticalAlign = cell.style.verticalAlign;
+//     if (cellVerticalAlign === "top" || cellVerticalAlign === "") {
+//       cellVerticalAlign = "middle";
+//     } else {
+//       if (cellVerticalAlign === "middle") {
+//         cellVerticalAlign = "bottom";
+//       } else {
+//         cellVerticalAlign = "top";
+//       }
+//     }
+//   cell.style.verticalAlign = cellVerticalAlign;
+//   });
