@@ -4,10 +4,14 @@ const ROCK_IMG = '<img src="images/rock.png">';
 const PAPER_IMG = '<img src="images/paper.png">';
 const SCISSORS_IMG = '<img src="images/scissors.png">';
 const tool_ids = ["R", "P", "S"];
-var userName = "Jeff";
+var userName = "";
 var userChoice = "";
+var userScore = 0;
+var cpuName = "CPU";
 var cpuChoice = "";
+var cpuScore = 0;
 var rule = "";
+var winningPlayer = "";
 
 class Image {
   constructor(id, path) {
@@ -17,9 +21,29 @@ class Image {
 }
 
 window.onload = function(e) {
-  this.getUser();
-  introRoll();
+  // Develop logic to check localStorage
+  this.getUser();  
+  //introRoll();
 };
+
+
+// Save user name locally
+// Total score, saved locally
+function updateLocal() {  
+  window.localStorage.setItem("userName", userName);
+  window.localStorage.setItem("userScore", userScore);
+
+  window.localStorage.setItem("cpuName", cpuName);
+  window.localStorage.setItem("cpuScore", cpuScore);
+}
+
+function getLocal() {
+  userName = window.localStorage.getItem("userName");
+  userScore = window.localStorage.getItem("userScore");
+
+  cpuName = window.localStorage.getItem("cpuName");
+  cpuScore = window.localStorage.getItem("cpuScore");
+}
 
 function getImagePath(id) {
   var path = "";
@@ -38,17 +62,33 @@ function getImagePath(id) {
 }
 
 function getUser() {
-  userName = prompt("Please enter your name", "Player 1");
-  if (userName != null) {
-    document.getElementById('user-name').innerText = userName;
-    document.getElementById('cpu').innerText = "CPU";
-  }
+  getLocal(); 
+
+  if (userName === "" || userName === null) {
+
+    userName = !userName
+      ? "Player 1"
+      : userName;
+    userName = prompt("Please enter your name", "Player 1");
+    userName = !userName
+      ? "Player 1"
+      : userName;  } 
+    
+    // userScore = 0
+    // cpuScore = 0
+
+  cpuName = "CPU";
+
+  updateLocal();
+
+  document.getElementById("user-name").innerText = `${userName}:  ${userScore}`;
+  document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
 }
 
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyUpHandler(e) {
-  userChoice = "";  
+  userChoice = "";
   switch (e.which) {
     case 80:
       userChoice = "P";
@@ -59,59 +99,108 @@ function keyUpHandler(e) {
     case 83:
       userChoice = "S";
       break;
-  }  
+  }
   if (userChoice !== "") {
     playGame();
   }
 }
 
 function playGame() {
+  clearCells();
   cpuChoice = getRandom(1, "PRS");
 
-  document.getElementById('user2').innerHTML = getImagePath(userChoice);
-  document.getElementById('user1').innerText = getToolName(userChoice);
-
-  //document.getElementById('result-cell').innerText = "vs";
-
-  document.getElementById('comp2').innerHTML = getImagePath(cpuChoice);
-  document.getElementById('comp1').innerText = getToolName(cpuChoice);
-
+  document.getElementById("user2").innerHTML = getImagePath(userChoice);
+  //document.getElementById("user1").innerText = getToolName(userChoice);
+  document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
+  //document.getElementById("comp1").innerText = getToolName(cpuChoice);
   var outcome = calculateWinner(userChoice + cpuChoice);
 
-  outcome != "TIE"
-    ? (document.getElementById("result-cell").innerText = `${getToolName(
-        outcome
-      )} Wins! \n${rule}`)
-    : (document.getElementById("result-cell").innerText = "Tie Game");
+  userChoice === outcome
+    ? (winningPlayer = userName)
+    : (winningPlayer = cpuName);
+
+  outcome = outcome != "TIE"
+    ? (document.getElementById("result-cell").innerHTML = getImagePath(outcome))
+    : outcome;
+  
+    if(outcome === "TIE") {
+    winningPlayer = "";
+    document.getElementById('result-cell').innerText = "Tie Game";
+  }
+
+  displayWinner(winningPlayer);
 }
 
+function clearCells() {
+  document.getElementById('user1').innerText = "";
+  document.getElementById('comp1').innerText = "";  
+}
+
+// Dtermine winner
 function calculateWinner(opponents) {
-    var winner = "NONE";
-    switch (opponents) {
-      case "PR":
-      case "RP":
-        winner = "P";
-        rule = "Paper Covers Rock"
-        break;
-      case "PS":
-      case "SP":
-        winner = "S";
-        rule = "Scissors Cut Paper";
-        break;
-      case "RS":
-      case "SR":
-        winner = "R";
-        rule = "Rock Crushes Scissors";
-        break;
-      case "PP":
-      case "RR":
-      case "SS":
-        winner = "TIE";
-        rule = winner;
-        break;
-    }
-    return winner;
-  } 
+  var winner = "NONE";
+  switch (opponents) {
+    case "PR":
+    case "RP":
+      winner = "P";
+      rule = "Paper Covers Rock"
+      break;
+    case "PS":
+    case "SP":
+      winner = "S";
+      rule = "Scissors Cut Paper";
+      break;
+    case "RS":
+    case "SR":
+      winner = "R";
+      rule = "Rock Crushes Scissors";
+      break;
+    case "PP":
+    case "RR":
+    case "SS":
+      winner = "TIE";
+      rule = winner;
+      break;
+  }
+  return winner;
+} 
+
+// Display winner
+function displayWinner(winner) {
+  // var winningCell = "";
+  // var losingCell = "";
+  switch (winner) {
+    case userName:
+      ++userScore;
+      document.getElementById("user1").innerText = rule;
+      document.getElementById('user1').style.backgroundColor = "#FFFFFF";
+      document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
+      // document.getElementById("user2").innerHTML = WAVE_IMG;
+      // document.getElementById("comp1").innerText = "";      
+      // document.getElementById("comp2").innerHTML = "";
+      break;
+
+    case cpuName:
+      ++cpuScore;
+      document.getElementById("comp1").innerText = rule;
+      document.getElementById('comp1').style.backgroundColor = "#FFFFFF";
+      document.getElementById('user1').style.backgroundColor = "#F4F4F4";
+      // document.getElementById("comp2").innerHTML = WAVE_IMG;
+      // document.getElementById("user1").innerText = "";
+      // document.getElementById("user2").innerHTML = "";  
+      break;
+    default:
+      document.getElementById('user1').innerText = "";      
+      document.getElementById('comp1').innerText = "";
+      document.getElementById('user1').style.backgroundColor = "#F4F4F4";
+      document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
+  }
+  updateLocal();
+
+  document.getElementById("user-name").innerText = `${userName}:  ${userScore}`;
+  document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
+}
+
 
 function getToolName(id) {
   var toolName = "";
@@ -146,17 +235,25 @@ function getRandom(length, chars) {
 // Flash between fist.png and rock.png three times
 // ^--Depicting "Rock! Paper! Scissors!"
 // On the third roll, display userChoice and cpuChoice
-// Dtermine winner
-// Display winner
-// Add to total score, saved locally
-// Ablility to clear score
 
-// Save user name locally
+
+
+
+
+
+// Ablility to clear score
+document
+  .getElementById("clear-local")
+  .addEventListener("click", function (e) {
+    e.preventDefault();
+    localStorage.clear();
+    location.reload(true);
+   });
 
 document
   .getElementById("page-action-btn")
-  .addEventListener("click", function(e) {
-    e.preventDefault;    
+  .addEventListener("click", function (e) {
+    e.preventDefault;
     introRoll();
   });
 
