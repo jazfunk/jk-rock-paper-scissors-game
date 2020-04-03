@@ -45,6 +45,34 @@
 
 
 
+// function loadImageList() {
+//   var imagePath = "";
+//   for (t in tool_ids) {
+//     switch (tool_ids[t]) {
+//       case "R":
+//         imagePath = ROCK_IMG;
+//         break;
+//       case "P":
+//         imagePath = PAPER_IMG;
+//         break;
+//       case "S":
+//         imagePath = SCISSORS_IMG;
+//         break;
+//     }
+//     image = new Image(tool_ids[t], imagePath);
+//     imageList.push(image);
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
 
 
 // document

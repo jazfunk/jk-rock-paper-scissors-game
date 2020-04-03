@@ -7,14 +7,13 @@
 </head>
 
 <body>
-    
-    <header>
+
+    <header id="main-header" class="header-main">
         <table>
             <tr>
                 <td>
                     <h1>Rock-Paper-Scissors</h1>
                     <button id="page-action-btn" class="my-buttons">Play Intro</button>
-                    <br>
                     <input type="text" id="run-text" class="my-input-text">
                 </td>
             </tr>
@@ -22,33 +21,37 @@
     </header>  
 
     <main>
+        
         <h3>
             Key: 'R' = Rock
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             'P' = Paper
             &nbsp;&nbsp;&nbsp;|&nbsp;&nbsp;&nbsp;
             'S' = Scissors
-        </h3>       
+        </h3>    
+
         <table class="game-table">
+            <tr class="menu-table">
+                <td id="user-name" colspan="2" class="menu-text">                    
+                </td>
+                <td id="menu-result" colspan="1" class="menu-result-text">                    
+                </td>
+                <td id="cpu" colspan="2" class="menu-text">                    
+                </td>
+            </tr>
             <tr>
-                <td id="user1" class="game-cell">
-                    <!-- <img src="images/fist.png"> -->
+                <td id="user1" class="game-cell">                    
                 </td>
                 <td id="user2" class="game-cell">
-                    <!-- <img src="images/rock.png"> -->
                 </td>
                 <td id="result-cell" class="game-cell-result">
-                    <!-- <img src="images/scissors.png"> -->
-                    <br>
-                    <span class="ai-game-result">
+                    <!-- <span class="ai-game-result">
                         <!-- <img src="images/paper.png"> -->
-                    </span>
+                    </span> -->
                 </td>
                 <td id="comp2" class="ai-game-cell">
-                    <!-- <img src="images/rock.png"> -->
                 </td>
                 <td id="comp1" class="ai-game-cell">
-                    <!-- <img src="images/fist.png"> -->
                 </td>
             </tr>            
         </table> 
@@ -103,9 +106,9 @@
     <footer>
         <h2>by Jeff King</h2>
         <h3>
-            <a href="https://github.com/jazfunk">[GitHub]</a>
+            <a href="https://github.com/jazfunk">GitHub</a>
             |
-            <a href="https://www.linkedin.com/in/jeffking222/">[LinkedIn]</a>
+            <a href="https://www.linkedin.com/in/jeffking222/">LinkedIn</a>
         </h3>
     </footer>
 
