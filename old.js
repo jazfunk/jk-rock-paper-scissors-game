@@ -92,3 +92,22 @@
 //     }
 //   cell.style.verticalAlign = cellVerticalAlign;
 //   });
+
+
+
+
+//document.getElementById("user1").innerText = rule;
+      // document.getElementById('user2').style.filter = "invert(100%)";
+      // document.getElementById('user2').style.filter = "blur(2px)";
+      // document.getElementById('user2').style.filter = "opacity(10%)";
+      // document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
+      // document.getElementById("user2").innerHTML = WAVE_IMG;
+
+
+      
+      //document.getElementById("comp1").innerText = rule;
+      // document.getElementById('comp1').style.backgroundColor = "#FFFFFF";
+      // document.getElementById('user1').style.backgroundColor = "#F4F4F4";
+      // document.getElementById("comp2").innerHTML = WAVE_IMG;
+      // document.getElementById("user1").innerText = "";
+      // document.getElementById("user2").innerHTML = "";  

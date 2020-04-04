@@ -85,7 +85,7 @@ h4 {
 }
 .game-cell {
     width: 100px;
-    height: 200px;
+    height: 222px;
     font-size: 22px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: darkslategrey;
@@ -101,7 +101,7 @@ h4 {
 }
 .ai-game-cell {
     width: 100px;
-    height: 200px;
+    height: 222px;
     font-size: 22px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     color: darkslategrey;
@@ -129,7 +129,7 @@ h4 {
 .game-cell-result {
     width: 200px;
     word-wrap: break-word;
-    padding: 4px;
+    padding: 8px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
     font-size: 32px;
     color:greenyellow;

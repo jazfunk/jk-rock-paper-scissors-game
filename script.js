@@ -3,16 +3,16 @@ const FIST_IMG = '<img id="fist-png" src="images/fist.png">';
 const ROCK_IMG = '<img id="rock-png" src="images/rock.png">';
 const PAPER_IMG = '<img id="paper-png" src="images/paper.png">';
 const SCISSORS_IMG = '<img id="scissors-png" src="images/scissors.png">';
-const tool_ids = ["R", "P", "S"];
-var userName = "";
-var userChoice = "";
+const tool_ids = ['R', 'P', 'S'];
+var userName = '';
+var userChoice = '';
 var userScore = 0;
-var cpuName = "CPU";
-var cpuChoice = "";
+var cpuName = 'CPU';
+var cpuChoice = '';
 var cpuScore = 0;
-var outcome = "";
-var rule = "";
-var winningPlayer = "";
+var outcome = '';
+var rule = '';
+var winningPlayer = '';
 
 class Image {
   constructor(id, path) {
@@ -27,7 +27,6 @@ window.onload = function(e) {
 };
 
 function updateLocal() {
-
   if(userScore === "" || userScore === null) {
     userScore = 0;
     cpuScore = 0;
@@ -40,22 +39,21 @@ function updateLocal() {
 
 function getLocal() {
   userName = window.localStorage.getItem("userName");
-
   userScore = window.localStorage.getItem("userScore");
   cpuName = window.localStorage.getItem("cpuName");
   cpuScore = window.localStorage.getItem("cpuScore");
 }
 
 function getImagePath(id) {
-  var path = "";
+  var path = '';
   switch (id) {
-    case "R":
+    case 'R':
       path = ROCK_IMG;
       break;
-    case "P":
+    case 'P':
       path = PAPER_IMG;
       break;
-    case "S":
+    case 'S':
       path = SCISSORS_IMG;
       break;
   }
@@ -102,12 +100,8 @@ function keyUpHandler(e) {
 function playGame() {
   clearCells();
   cpuChoice = getRandom(1, "PRS");
-
-  document.getElementById("user2").innerHTML = getImagePath(userChoice);
-  //document.getElementById("user1").innerText = getToolName(userChoice);
+  document.getElementById("user2").innerHTML = getImagePath(userChoice);;
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
-  //document.getElementById("comp2").innerHTML = '<style>="transform: scaleX(-1)">'+getImagePath(cpuChoice)+'</style>';
-  //document.getElementById("comp1").innerText = getToolName(cpuChoice);
   outcome = calculateWinner(userChoice + cpuChoice);
 
   userChoice === outcome
@@ -133,16 +127,6 @@ function playGame() {
       break;
     default:
   }
-  //  outcome != "TIE"
-  //   ? (document.getElementById("result-cell")
-  //       .innerHTML = 
-  //       `${getImagePath(outcome)}<br>${rule}`)
-  //   : outcome = outcome;
-  
-  //   if(outcome === "TIE") {
-  //   winningPlayer = "";
-  //   document.getElementById('result-cell').innerText = "Tie Game";
-  // }  
   displayWinner(winningPlayer);
 }
 
@@ -183,68 +167,76 @@ function calculateWinner(opponents) {
 function displayWinner(winner) {
   // var winningCell = "";
   // var losingCell = "";
+  var resultCell = document.getElementById('result-cell');
+  var user_NameCell =  document.getElementById('user-name');
+  var cpuCell = document.getElementById('cpu');
+  var user1Cell = document.getElementById("user1");
+  var user2Cell = document.getElementById("user2");
+  var comp1Cell = document.getElementById("comp1"); 
+  var comp2Cell = document.getElementById("comp2");
+  debugger;
+
   switch (winner) {
     case userName:
       ++userScore;
-      document.getElementById("user1").innerHTML = `${WAVE_IMG}<br>${userName} Wins!`;
-      document.getElementById('user1').style.backgroundColor = "#FFFFFF";     
-      document.getElementById('comp1').innerText = "";
-      //document.getElementById('user1').style.filter = "drop-shadow(0 0 0.75rem greenyellow)";
-      document.getElementById('user2').style.filter = "drop-shadow(5px 5px 10px darkslategray)";
-      document.getElementById('user2').style.backgroundColor = "greenyellow";      
-      document.getElementById("comp2").style.backgroundColor = "#F4F4F4";
-      document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
-      document.getElementById('comp2').style.filter = "blur(4px)";
-      document.getElementById('comp1').style.filter= "";  
-      document.getElementById('user-name').style.backgroundColor = "dodgerblue"; 
-      document.getElementById('cpu').style.backgroundColor = "darkslategray";     
-      //document.getElementById("user1").innerText = rule;
-      // document.getElementById('user2').style.filter = "invert(100%)";
-      // document.getElementById('user2').style.filter = "blur(2px)";
-      // document.getElementById('user2').style.filter = "opacity(10%)";
-      // document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
-      // document.getElementById("user2").innerHTML = WAVE_IMG;
+      resultCell.style.backgroundColor = "#FFFFFF";
+      user_NameCell.style.backgroundColor = "dodgerblue";
+      cpuCell.style.backgroundColor = "darkslategray";     
+
+      user1Cell.innerHTML = `${WAVE_IMG}<br>${userName} Wins!`;
+      user1Cell.style.backgroundColor = "#FFFFFF";  
+
+      user2Cell.style.filter = "drop-shadow(5px 5px 10px darkslategray)";
+      user2Cell.style.backgroundColor = "greenyellow";      
+
+      comp1Cell.innerText = "";      
+      comp1Cell.style.filter= "";  
+      comp1Cell.style.backgroundColor = "#F4F4F4";
+
+      comp2Cell.style.backgroundColor = "#F4F4F4";
+      comp2Cell.style.filter = "blur(4px)";      
       break;
     case cpuName:
       ++cpuScore;
-      document.getElementById("comp1").innerHTML = `${WAVE_IMG}<br>${cpuName} Wins!`;
-      document.getElementById('user1').innerText = "";
-      document.getElementById('user1').style.backgroundColor = "#F4F4F4";
-      document.getElementById('comp2').style.filter = "drop-shadow(5px 5px 10px darkslategray)";
-      document.getElementById('comp1').style.backgroundColor = "#FFFFFF";
-      document.getElementById('comp2').style.backgroundColor = "greenyellow";      
-      document.getElementById('user2').style.backgroundColor = "#F4F4F4";
-      document.getElementById('user2').style.filter = "blur(4px)";
-      document.getElementById('user1').style.filter = "";
-      document.getElementById('cpu').style.backgroundColor = "dodgerblue"; 
-      document.getElementById('user-name').style.backgroundColor = "darkslategray";     
-      //document.getElementById("comp1").innerText = rule;
-      // document.getElementById('comp1').style.backgroundColor = "#FFFFFF";
-      // document.getElementById('user1').style.backgroundColor = "#F4F4F4";
-      // document.getElementById("comp2").innerHTML = WAVE_IMG;
-      // document.getElementById("user1").innerText = "";
-      // document.getElementById("user2").innerHTML = "";  
+      resultCell.style.backgroundColor = "#FFFFFF";
+      cpuCell.style.backgroundColor = "dodgerblue"; 
+      user_NameCell.style.backgroundColor = "darkslategray";     
+
+      comp1Cell.innerHTML = `${WAVE_IMG}<br>${cpuName} Wins!`;      
+      comp1Cell.style.backgroundColor = "#FFFFFF";
+
+      comp2Cell.style.filter = "drop-shadow(5px 5px 10px darkslategray)";
+      comp2Cell.style.backgroundColor = "greenyellow";  
+
+      user1Cell.innerText = "";
+      user1Cell.style.filter = "";
+      user1Cell.style.backgroundColor = "#F4F4F4";
+      
+      user2Cell.style.backgroundColor = "#F4F4F4";
+      user2Cell.style.filter = "blur(4px)";
       break;
     default:
-      document.getElementById('user1').innerText = "";      
-      document.getElementById('comp1').innerText = "";
-      document.getElementById('user1').style.backgroundColor = "#F4F4F4";
-      document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
-      document.getElementById('user2').style.backgroundColor = "#F4F4F4";
-      document.getElementById('comp2').style.backgroundColor = "#F4F4F4";
-      document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
-      document.getElementById('user2').style.filter = "";
-      document.getElementById('comp2').style.filter = "";
-      document.getElementById('user-name').style.backgroundColor = "darkslategray"; 
-      document.getElementById('cpu').style.backgroundColor = "darkslategray";     
+      resultCell.style.backgroundColor = "#FFFFFF";
+      user_NameCell.style.backgroundColor = "darkslategray"; 
+      cpuCell.style.backgroundColor = "darkslategray";     
+
+      user1Cell.innerText = "";
+      user1Cell.style.backgroundColor = "#F4F4F4";
+
+      user2Cell.style.backgroundColor = "#F4F4F4";
+      user2Cell.style.filter = "";
+
+      comp1Cell.innerText = "";
+      comp1Cell.style.backgroundColor = "#F4F4F4";
+      comp1Cell.style.backgroundColor = "#F4F4F4";
+
+      comp2Cell.style.backgroundColor = "#F4F4F4";
+      comp2Cell.style.filter = "";    
   }
-
-  updateLocal();
-
-  document.getElementById("user-name").innerText = `${userName}:  ${userScore}`;
-  document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
+  user_NameCell.innerText = `${userName}:  ${userScore}`;
+  cpuCell.innerText = `${cpuName}:  ${cpuScore}`;
+  updateLocal();  
 }
-
 
 function getToolName(id) {
   var toolName = "";
