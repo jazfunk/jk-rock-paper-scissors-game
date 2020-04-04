@@ -27,6 +27,11 @@ window.onload = function(e) {
 };
 
 function updateLocal() {
+
+  if(userScore === "" || userScore === null) {
+    userScore = 0;
+    cpuScore = 0;
+  }
   window.localStorage.setItem("userName", userName);
   window.localStorage.setItem("userScore", userScore);
   window.localStorage.setItem("cpuName", cpuName);
@@ -35,6 +40,7 @@ function updateLocal() {
 
 function getLocal() {
   userName = window.localStorage.getItem("userName");
+
   userScore = window.localStorage.getItem("userScore");
   cpuName = window.localStorage.getItem("cpuName");
   cpuScore = window.localStorage.getItem("cpuScore");
@@ -61,6 +67,10 @@ function getUser() {
   //if (userName = !userName) {
   if (userName === "" || userName === null) {
     userName = prompt("Please enter your name", "Player 1");
+    if (userName.length > 10) {
+      alert("Name too long.  Must be 10 or less characters.")
+      userName = "Player 1";     
+    }
     userName = !userName ? "Player 1" : userName;
   } 
   cpuName = "CPU";

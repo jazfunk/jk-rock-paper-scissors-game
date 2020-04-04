@@ -52,7 +52,7 @@ h4 {
 }
 .game-table {
     width: 800px;
-    border: 2px solid;
+    /* border: 2px solid; */
     background-color: #ffffff;
 }
 .menu-text {
@@ -81,7 +81,7 @@ h4 {
 .main-cell > img {    
     width: 75px;
     height: 75px;
-    filter: drop-shadow(0 0 0.25rem #FAFAD2);
+    filter: drop-shadow(0 0 0.15rem greenyellow);
 }
 .game-cell {
     width: 100px;
