@@ -1,8 +1,8 @@
-const WAVE_IMG = '<img src="images/wave.png">';
-const FIST_IMG = '<img src="images/fist.png">';
-const ROCK_IMG = '<img src="images/rock.png">';
-const PAPER_IMG = '<img src="images/paper.png">';
-const SCISSORS_IMG = '<img src="images/scissors.png">';
+const WAVE_IMG = '<img id="wave-png" src="images/wave.png">';
+const FIST_IMG = '<img id="fist-png" src="images/fist.png">';
+const ROCK_IMG = '<img id="rock-png" src="images/rock.png">';
+const PAPER_IMG = '<img id="paper-png" src="images/paper.png">';
+const SCISSORS_IMG = '<img id="scissors-png" src="images/scissors.png">';
 const tool_ids = ["R", "P", "S"];
 var userName = "";
 var userChoice = "";
@@ -10,6 +10,7 @@ var userScore = 0;
 var cpuName = "CPU";
 var cpuChoice = "";
 var cpuScore = 0;
+var outcome = "";
 var rule = "";
 var winningPlayer = "";
 
@@ -26,13 +27,11 @@ window.onload = function(e) {
   //introRoll();
 };
 
-
 // Save user name locally
 // Total score, saved locally
 function updateLocal() {  
   window.localStorage.setItem("userName", userName);
   window.localStorage.setItem("userScore", userScore);
-
   window.localStorage.setItem("cpuName", cpuName);
   window.localStorage.setItem("cpuScore", cpuScore);
 }
@@ -40,7 +39,6 @@ function updateLocal() {
 function getLocal() {
   userName = window.localStorage.getItem("userName");
   userScore = window.localStorage.getItem("userScore");
-
   cpuName = window.localStorage.getItem("cpuName");
   cpuScore = window.localStorage.getItem("cpuScore");
 }
@@ -73,14 +71,9 @@ function getUser() {
     userName = !userName
       ? "Player 1"
       : userName;  } 
-    
-    // userScore = 0
-    // cpuScore = 0
 
   cpuName = "CPU";
-
   updateLocal();
-
   document.getElementById("user-name").innerText = `${userName}:  ${userScore}`;
   document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
 }
@@ -113,21 +106,23 @@ function playGame() {
   //document.getElementById("user1").innerText = getToolName(userChoice);
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
   //document.getElementById("comp1").innerText = getToolName(cpuChoice);
-  var outcome = calculateWinner(userChoice + cpuChoice);
+  outcome = calculateWinner(userChoice + cpuChoice);
 
   userChoice === outcome
     ? (winningPlayer = userName)
     : (winningPlayer = cpuName);
 
-  outcome = outcome != "TIE"
-    ? (document.getElementById("result-cell").innerHTML = getImagePath(outcome))
-    : outcome;
+   outcome != "TIE"
+    ? (document.getElementById("result-cell")
+        .innerHTML = 
+        `${getImagePath(outcome)}<br>${rule}`)
+    : outcome = outcome;
   
     if(outcome === "TIE") {
     winningPlayer = "";
     document.getElementById('result-cell').innerText = "Tie Game";
   }
-
+  
   displayWinner(winningPlayer);
 }
 
@@ -148,12 +143,12 @@ function calculateWinner(opponents) {
     case "PS":
     case "SP":
       winner = "S";
-      rule = "Scissors Cut Paper";
+      rule = "Scissors Cuts Paper";
       break;
     case "RS":
     case "SR":
       winner = "R";
-      rule = "Rock Crushes Scissors";
+      rule = "Rock Smashes Scissors";
       break;
     case "PP":
     case "RR":
@@ -172,9 +167,26 @@ function displayWinner(winner) {
   switch (winner) {
     case userName:
       ++userScore;
-      document.getElementById("user1").innerText = rule;
+      //document.getElementById('user1').innerText = `${getToolName(userChoice)} \n Wins!`;
+      document.getElementById("user1").innerHTML = `${WAVE_IMG}<br>${userName} Wins!`;
       document.getElementById('user1').style.backgroundColor = "#FFFFFF";
+      document.getElementById('comp1').innerText = "";
+      //document.getElementById('user1').style.filter = "drop-shadow(0 0 0.75rem greenyellow)";
+      document.getElementById('user2').style.filter = "drop-shadow(5px 5px 10px darkslategray)";
+      //document.getElementById('user1').style.backgroundColor = "#FAFAD2";  
+      document.getElementById('user2').style.backgroundColor = "#FAFAD2";      
+      document.getElementById("comp2").style.backgroundColor = "#F4F4F4";
       document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
+      document.getElementById('comp2').style.filter = "blur(2px)";
+      document.getElementById('comp1').style.filter= "";
+      
+      
+      //document.getElementById("user1").innerText = rule;
+      // document.getElementById('user2').style.filter = "invert(100%)";
+      // document.getElementById('user2').style.filter = "blur(2px)";
+      // document.getElementById('user2').style.filter = "opacity(10%)";
+      // document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
+
       // document.getElementById("user2").innerHTML = WAVE_IMG;
       // document.getElementById("comp1").innerText = "";      
       // document.getElementById("comp2").innerHTML = "";
@@ -182,9 +194,23 @@ function displayWinner(winner) {
 
     case cpuName:
       ++cpuScore;
-      document.getElementById("comp1").innerText = rule;
-      document.getElementById('comp1').style.backgroundColor = "#FFFFFF";
+      // document.getElementById('comp1').innerText = `${getToolName(cpuChoice)} \n Wins!`;
+      document.getElementById("comp1").innerHTML = `${WAVE_IMG}<br>${cpuName} Wins!`;
+      document.getElementById('user1').innerText = "";
       document.getElementById('user1').style.backgroundColor = "#F4F4F4";
+      //document.getElementById('comp1').style.filter = "drop-shadow(5px 5px 10px darkslategray)";
+      document.getElementById('comp2').style.filter = "drop-shadow(5px 5px 10px darkslategray)";
+      //document.getElementById('comp1').style.backgroundColor = "#FFFFFF";      
+      document.getElementById('comp1').style.backgroundColor = "#FFFFFF";
+      document.getElementById('comp2').style.backgroundColor = "#FAFAD2";      
+      document.getElementById('user2').style.backgroundColor = "#F4F4F4";
+      document.getElementById('user2').style.filter = "blur(2px)";
+      document.getElementById('user1').style.filter = "";
+      
+      
+      //document.getElementById("comp1").innerText = rule;
+      // document.getElementById('comp1').style.backgroundColor = "#FFFFFF";
+      // document.getElementById('user1').style.backgroundColor = "#F4F4F4";
       // document.getElementById("comp2").innerHTML = WAVE_IMG;
       // document.getElementById("user1").innerText = "";
       // document.getElementById("user2").innerHTML = "";  
@@ -194,9 +220,14 @@ function displayWinner(winner) {
       document.getElementById('comp1').innerText = "";
       document.getElementById('user1').style.backgroundColor = "#F4F4F4";
       document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
+      document.getElementById('user2').style.backgroundColor = "#F4F4F4";
+      document.getElementById('comp2').style.backgroundColor = "#F4F4F4";
+      document.getElementById('comp1').style.backgroundColor = "#F4F4F4";
+      document.getElementById('user2').style.filter = "";
   }
   updateLocal();
 
+  document.getElementById('menu-result').innerText = `${getToolName(outcome)} Wins!`;
   document.getElementById("user-name").innerText = `${userName}:  ${userScore}`;
   document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
 }

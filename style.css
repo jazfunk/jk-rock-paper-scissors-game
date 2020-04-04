@@ -1,6 +1,7 @@
 * {
     margin: 0 auto;
     padding: 0px;
+    /* color: ; */
 }
 body {    
     background-color: #999999;
@@ -36,6 +37,7 @@ h4 {
     font-family: 'Courier New', Courier, monospace;
     color: #f4f4f4;
     text-align: center; 
+    padding: 2px 2px;
 }
 .header-main {
     height: 100px;
@@ -82,7 +84,7 @@ h4 {
 }
 .game-cell {
     width: 100px;
-    height: 100px;
+    height: 175px;
     font-size: 22px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
@@ -99,6 +101,7 @@ h4 {
 }
 .ai-game-cell {
     width: 100px;
+    height: 175px;
     font-size: 22px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: bold;
@@ -125,8 +128,8 @@ h4 {
 .game-cell-result {
     width: 200px;
     word-wrap: break-word;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    font-size: 24px;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 28px;
     text-align: center;
     vertical-align: middle;
     background-color: #f4f4f4;
