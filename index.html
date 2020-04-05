@@ -12,14 +12,15 @@
         <table>
             <tr>
                 <td>
-                    <h1>Rock-Paper-Scissors</h1>
-                    <button id="page-action-btn" class="my-buttons">Play Intro</button>
-                    <input type="text" id="run-text" class="my-input-text">
+                    <h1>
+                        <button id="page-action-btn" class="my-buttons">Play Intro</button>
+                        Rock-Paper-Scissors
+                    </h1>
                 </td>
             </tr>
         </table>
-    </header>  
-
+    </header>
+    <!-- <input type="text" id="run-text" class="my-input-text"> -->
     <main>
         
         <h3>
@@ -51,12 +52,7 @@
                 <td id="comp1" class="ai-game-cell">
                 </td>
             </tr>            
-        </table> 
-
-        <h4>
-            <button id="clear-local" class="my-buttons">Clear Memory & Start New Game</button>
-        </h4>
-
+        </table>         
         <table class="main-table">            
             <tr>
                 <td class="main-cell">
@@ -72,34 +68,41 @@
                     <img src="images/rock.png">
                 </td>
                 <td class="main-cell">
-                    <img src="images/scissors.png">
-                </td>
-                <td class="main-cell">
                     <img src="images/paper.png">
-                </td>
-            </tr>
-            <tr class="ai-player">
-                <td class="main-cell">
-                    <span class="player-title">CPU</span>
-                </td>
-                <td class="main-cell">
-                    <img src="images/wave.png">
-                </td>
-                <td class="main-cell">
-                    <img src="images/fist.png">  
-                </td>
-                <td class="main-cell">
-                    <img src="images/rock.png">
                 </td>
                 <td class="main-cell">
                     <img src="images/scissors.png">
                 </td>
-                <td class="main-cell">
-                    <img src="images/paper.png">
+                <td style="background-color: #e2e2e2;">
+                    &nbsp;
                 </td>
-            </tr>
+                <span class="ai-player">
+                    <td class="ai-player">
+                        <img src="images/scissors.png">
+                    </td>
+                    <td class="ai-player">
+                        <img src="images/paper.png">
+                    </td>
+                    <td class="ai-player">
+                        <img src="images/rock.png">
+                    </td>                    
+                    <td class="ai-player">
+                        <img src="images/fist.png">  
+                    </td>
+                    <td class="ai-player">
+                        <img src="images/wave.png">
+                    </td>
+                    <td class="ai-player">
+                        <span class="player-title">CPU</span>
+                    </td>                    
+                </span>
+            </tr>            
         </table>
-        <h4>&nbsp;</h4>
+
+        <h4>
+            <button id="clear-local" class="my-buttons">Clear Memory & Start New Game</button>
+        </h4>
+
     </main>
 
     <footer>
@@ -112,6 +115,7 @@
     </footer>
 
     <h4>Software Development Mastermind</h4>
+
     <h4>
         Images &copy; <a href="https://thenounproject.com/cristiano.zoucas" style="font-size: 18px">Cristiano Zoucas, BR</a>
     </h4>
