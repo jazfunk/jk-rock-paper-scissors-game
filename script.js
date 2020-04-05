@@ -27,7 +27,7 @@ window.onload = function(e) {
 };
 
 function updateLocal() {
-  if(userScore === "" || userScore === null) {
+  if (userScore === "" || userScore === null) {
     userScore = 0;
     cpuScore = 0;
   }
@@ -61,12 +61,11 @@ function getImagePath(id) {
 }
 
 function getUser() {
-  getLocal();   
-  //if (userName = !userName) {
+  getLocal();     
   if (userName === "" || userName === null) {
-    userName = prompt("Please enter your name", "Player 1");
+    userName = prompt("Enter your name", "Player 1");
     if (userName.length > 10) {
-      alert("Name too long.  Must be 10 or less characters.")
+      alert("Name entered is too long.  Limit 10 characters.")
       userName = "Player 1";     
     }
     userName = !userName ? "Player 1" : userName;
@@ -98,7 +97,6 @@ function keyUpHandler(e) {
 }
 
 function playGame() {
-  // clearCells();
   cpuChoice = getRandom(1, "PRS");
   document.getElementById("user2").innerHTML = getImagePath(userChoice);;
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
@@ -129,12 +127,6 @@ function playGame() {
   displayWinner(winningPlayer);
 }
 
-// function clearCells() {
-//   document.getElementById('user1').innerText = "";
-//   document.getElementById('comp1').innerText = "";  
-// }
-
-// Dtermine winner
 function calculateWinner(opponents) {
   var winner = "NONE";
   switch (opponents) {
@@ -164,6 +156,7 @@ function calculateWinner(opponents) {
 } 
 
 function displayWinner(winner) {
+  // Might use these var's below
   // var winningCell = "";
   // var losingCell = "";
   var resultCell = document.getElementById('result-cell');
@@ -182,13 +175,13 @@ function displayWinner(winner) {
       user_NameCell.style.backgroundColor = "dodgerblue";
       cpuCell.style.backgroundColor = "darkslategray";     
 
-      user1Cell.innerHTML = `${WAVE_IMG}<br>${userName} Wins!`;
+      user1Cell.innerHTML = `${WAVE_IMG} <br> ${userName} <br> Wins!`;
       user1Cell.style.backgroundColor = "#FFFFFF";  
 
       user2Cell.style.filter = "drop-shadow(5px 5px 10px darkslategray)";
       user2Cell.style.backgroundColor = "greenyellow";      
 
-      comp1Cell.innerText = `${getToolName(cpuChoice)} Loses`;      
+      comp1Cell.innerText = `${getToolName(cpuChoice)} \n Loses`;      
       comp1Cell.style.filter= "";  
       comp1Cell.style.backgroundColor = "#F4F4F4";
 
@@ -203,13 +196,13 @@ function displayWinner(winner) {
       cpuCell.style.backgroundColor = "dodgerblue"; 
       user_NameCell.style.backgroundColor = "darkslategray";     
 
-      comp1Cell.innerHTML = `${WAVE_IMG}<br>${cpuName} Wins!`;      
+      comp1Cell.innerHTML = `${WAVE_IMG} <br> ${cpuName} <br> Wins!`;      
       comp1Cell.style.backgroundColor = "#FFFFFF";
 
       comp2Cell.style.filter = "drop-shadow(5px 5px 10px darkslategray)";
       comp2Cell.style.backgroundColor = "greenyellow";  
 
-      user1Cell.innerText = `${getToolName(userChoice)} Loses`;
+      user1Cell.innerText = `${getToolName(userChoice)} \n Loses`;
       user1Cell.style.filter = "";
       user1Cell.style.backgroundColor = "#F4F4F4";
       
@@ -267,18 +260,12 @@ function getRandom(length, chars) {
   return result;
 }
 
-
 // Psuedo Code //
 // ----------- //
 // Develop "Roll"
 // Flash between fist.png and rock.png three times
 // ^--Depicting "Rock! Paper! Scissors!"
 // On the third roll, display userChoice and cpuChoice
-
-
-
-
-
 
 // Ablility to clear score
 document
@@ -297,42 +284,36 @@ document
     introRoll();
   });
 
-  // function delay() {
-  //   setTimeout(() => {
-  //     introRoll("user2");
-  //     introRoll("comp2");
+// Roll 3 times, Rock!...Paper!...Scissors!
+function introRoll() {   
+  document.getElementById('user1').innerHTML = FIST_IMG;
+  document.getElementById('comp1').innerHTML =  FIST_IMG;
+  document.getElementById("result-cell").innerText = "";
+
+    setTimeout(function() {
+      document.getElementById('user1').innerHTML = "";
+      document.getElementById('user2').innerHTML = ROCK_IMG;
+      document.getElementById('comp1').innerHTML = "";
+      document.getElementById('comp2').innerHTML = ROCK_IMG;
+      document.getElementById("result-cell").innerText = "ROCK!";
+    }, 750);
+
+    setTimeout(function() {
+      document.getElementById('user1').innerHTML = "";
+      document.getElementById('user2').innerHTML = "";
+      document.getElementById('comp1').innerHTML = "";
+      document.getElementById('comp2').innerHTML = "";
+      document.getElementById('menu-result').innerText = "Press A Key to Play";
+      document.getElementById('result-cell').innerText = 
+        `${userName} \n Play again?`;
+    }, 2000);
+
+  // for (t in tool_ids) {
+  //   document.getElementById(cell).innerHTML = FIST_IMG;
+  //   setTimeout(function() {
+  //     document.getElementById(cell).innerHTML = ROCK_IMG;
+  //     document.getElementById("result-cell").innerText =
+  //       getToolName(tool_ids[t]) + "!";
   //   }, 1000);
   // }
-
-  function introRoll() {   
-   document.getElementById('user1').innerHTML = FIST_IMG;
-   document.getElementById('comp1').innerHTML =  FIST_IMG;
-   document.getElementById("result-cell").innerText = "";
-  
-      setTimeout(function() {
-        document.getElementById('user1').innerHTML = "";
-        document.getElementById('user2').innerHTML = ROCK_IMG;
-        document.getElementById('comp1').innerHTML = "";
-        document.getElementById('comp2').innerHTML = ROCK_IMG;
-        document.getElementById("result-cell").innerText = "ROCK!";
-      }, 750);
-
-      setTimeout(function() {
-        document.getElementById('user1').innerHTML = "";
-        document.getElementById('user2').innerHTML = "";
-        document.getElementById('comp1').innerHTML = "";
-        document.getElementById('comp2').innerHTML = "";
-        document.getElementById('menu-result').innerText = "Press A Key to Play";
-        document.getElementById('result-cell').innerText = 
-          `${userName} \n Play again?`;
-      }, 2000);
-
-    // for (t in tool_ids) {
-    //   document.getElementById(cell).innerHTML = FIST_IMG;
-    //   setTimeout(function() {
-    //     document.getElementById(cell).innerHTML = ROCK_IMG;
-    //     document.getElementById("result-cell").innerText =
-    //       getToolName(tool_ids[t]) + "!";
-    //   }, 1000);
-    // }
-  }
+}

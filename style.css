@@ -16,8 +16,11 @@ a {
     color: #999999;    
 }
 h1 {    
-    font-size: 28px;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;    
+    font-size: 36px;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; 
+    filter: drop-shadow(0 0 0.50rem black);   
+    padding: 0px;   
+    margin: 0px; 
 }
 h2 {
     font-size: 22px;
@@ -43,7 +46,7 @@ h4 {
     padding: 2px 2px;
 }
 .header-main {
-    height: 83px;
+    height: 100px;
     background-color: dodgerblue;
     color: white;    
     text-align: center;  
@@ -52,11 +55,12 @@ h4 {
 .menu-table {
     background-color: darkslategray;
     color: #f4f4f4;
+    border-radius: 7px;
 }
 .game-table {
     width: 800px;
-    /* border: 2px solid; */
     background-color: #ffffff;
+    border-radius: 7px;
 }
 .menu-text {
     font-size: 18px;
@@ -64,6 +68,7 @@ h4 {
     color: ghostwhite;
     padding: 4px 4px;    
     text-align: center;
+    border-radius: 7px;
 }
 .menu-result-text {
     font-size: 18px;
@@ -71,21 +76,24 @@ h4 {
     color: greenyellow;
     padding: 2px 2px;    
     text-align: center;
+    border-radius: 7px;
 }
 .main-table { 
     width: 800px;
-    background-color: #ffffff;    
+    background-color: #ffffff;  
+    border-radius: 7px;  
 }
 .main-cell {    
     text-align: center;
     background-color: #f4f4f4;
     padding: 3px;
-    margin: 3px;      
+    margin: 3px;   
+    border-radius: 7px;       
 }
 .main-cell > img {    
     width: 75px;
     height: 75px;
-    filter: drop-shadow(0 0 0.15rem greenyellow);
+    filter: drop-shadow(0 0 0.15rem rgb(213, 255, 150));
 }
 .game-cell {
     width: 100px;
@@ -99,6 +107,7 @@ h4 {
     margin: 0px; 
     vertical-align: middle;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    border-radius: 5px;
     /* background-image: url("images/fist.png");  */
     /* background: url(images/fist.png);
     background-repeat: no-repeat;
@@ -115,6 +124,7 @@ h4 {
     background-color: #f4f4f4;
     padding: 0px;
     margin: 0px; 
+    border-radius: 5px;
     /* vertical-align: top;         */
     /* background-image: url("images/fist.png");  */
     /* background: url(images/fist.png);
@@ -143,6 +153,7 @@ h4 {
     text-align: center;
     vertical-align: middle;
     background-color: #f4f4f4;
+    border-radius: 5px;
 }
 .game-cell-result > img {
     width: 100px;
