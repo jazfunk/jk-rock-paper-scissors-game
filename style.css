@@ -4,7 +4,8 @@
     /* color: ; */
 }
 body {    
-    background-color: #999999;
+    background-color: #e2e2e2;
+    /* background-color: #999999; */
 }
 footer {
     background-color: darkslategray;
@@ -26,16 +27,18 @@ h2 {
     padding: 8px;
 }
 h3 {
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
     color: #ffffff;
     text-align: center; 
-    padding: 2px 2px;
+    padding: 4px 4px;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 h4 {
     font-size: 18px;
     font-family: 'Courier New', Courier, monospace;
-    color: #f4f4f4;
+    color: #b3b3b3;
     text-align: center; 
     padding: 2px 2px;
 }
@@ -56,7 +59,7 @@ h4 {
     background-color: #ffffff;
 }
 .menu-text {
-    font-size: 14px;
+    font-size: 18px;
     font-family: monospace;
     color: ghostwhite;
     padding: 4px 4px;    
@@ -70,6 +73,7 @@ h4 {
     text-align: center;
 }
 .main-table { 
+    width: 800px;
     background-color: #ffffff;    
 }
 .main-cell {    
@@ -88,12 +92,13 @@ h4 {
     height: 222px;
     font-size: 22px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: darkslategrey;
+    color: white;
     text-align: center;
     background-color: #f4f4f4;
     padding: 0px;
     margin: 0px; 
     vertical-align: middle;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     /* background-image: url("images/fist.png");  */
     /* background: url(images/fist.png);
     background-repeat: no-repeat;
@@ -104,7 +109,8 @@ h4 {
     height: 222px;
     font-size: 22px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-    color: darkslategrey;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
     text-align: center;
     background-color: #f4f4f4;
     padding: 0px;
@@ -161,7 +167,7 @@ h4 {
 }
 .my-buttons {    
     padding: 2px 22px;  
-    margin: 2px 22px; 
+    margin: 8px 8px; 
     border-radius: 4px; 
     font-size: 18px;
     font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;

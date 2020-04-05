@@ -98,7 +98,7 @@ function keyUpHandler(e) {
 }
 
 function playGame() {
-  clearCells();
+  // clearCells();
   cpuChoice = getRandom(1, "PRS");
   document.getElementById("user2").innerHTML = getImagePath(userChoice);;
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
@@ -121,19 +121,18 @@ function playGame() {
       break;
     case "TIE":
       winningPlayer = "";
-      document.getElementById('result-cell').innerText = "Tie Game";
+      document.getElementById('result-cell').innerText = `Tie Game \n -${getToolName(userChoice)}-`;
       document.getElementById('menu-result').innerText = "Push";
-      // Create function to clear/reset all cells
       break;
     default:
   }
   displayWinner(winningPlayer);
 }
 
-function clearCells() {
-  document.getElementById('user1').innerText = "";
-  document.getElementById('comp1').innerText = "";  
-}
+// function clearCells() {
+//   document.getElementById('user1').innerText = "";
+//   document.getElementById('comp1').innerText = "";  
+// }
 
 // Dtermine winner
 function calculateWinner(opponents) {
@@ -174,11 +173,11 @@ function displayWinner(winner) {
   var user2Cell = document.getElementById("user2");
   var comp1Cell = document.getElementById("comp1"); 
   var comp2Cell = document.getElementById("comp2");
-  debugger;
-
+  
   switch (winner) {
     case userName:
       ++userScore;
+
       resultCell.style.backgroundColor = "#FFFFFF";
       user_NameCell.style.backgroundColor = "dodgerblue";
       cpuCell.style.backgroundColor = "darkslategray";     
@@ -189,15 +188,17 @@ function displayWinner(winner) {
       user2Cell.style.filter = "drop-shadow(5px 5px 10px darkslategray)";
       user2Cell.style.backgroundColor = "greenyellow";      
 
-      comp1Cell.innerText = "";      
+      comp1Cell.innerText = `${getToolName(cpuChoice)} Loses`;      
       comp1Cell.style.filter= "";  
       comp1Cell.style.backgroundColor = "#F4F4F4";
 
       comp2Cell.style.backgroundColor = "#F4F4F4";
-      comp2Cell.style.filter = "blur(4px)";      
+      comp2Cell.style.filter = "blur(1px)";      
       break;
+
     case cpuName:
       ++cpuScore;
+
       resultCell.style.backgroundColor = "#FFFFFF";
       cpuCell.style.backgroundColor = "dodgerblue"; 
       user_NameCell.style.backgroundColor = "darkslategray";     
@@ -208,13 +209,14 @@ function displayWinner(winner) {
       comp2Cell.style.filter = "drop-shadow(5px 5px 10px darkslategray)";
       comp2Cell.style.backgroundColor = "greenyellow";  
 
-      user1Cell.innerText = "";
+      user1Cell.innerText = `${getToolName(userChoice)} Loses`;
       user1Cell.style.filter = "";
       user1Cell.style.backgroundColor = "#F4F4F4";
       
       user2Cell.style.backgroundColor = "#F4F4F4";
-      user2Cell.style.filter = "blur(4px)";
+      user2Cell.style.filter = "blur(1px)";
       break;
+
     default:
       resultCell.style.backgroundColor = "#FFFFFF";
       user_NameCell.style.backgroundColor = "darkslategray"; 
@@ -233,6 +235,7 @@ function displayWinner(winner) {
       comp2Cell.style.backgroundColor = "#F4F4F4";
       comp2Cell.style.filter = "";    
   }
+  
   user_NameCell.innerText = `${userName}:  ${userScore}`;
   cpuCell.innerText = `${cpuName}:  ${cpuScore}`;
   updateLocal();  
