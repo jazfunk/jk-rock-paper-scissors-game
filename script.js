@@ -79,6 +79,7 @@ function getUser() {
 document.addEventListener("keyup", keyUpHandler, false);
 
 function keyUpHandler(e) {
+  // highlightControlPanelItem('clear');
   userChoice = "";
   switch (e.which) {
     case 80:
@@ -96,11 +97,13 @@ function keyUpHandler(e) {
   }
 }
 
-function playGame() {
+function playGame() {  
   cpuChoice = getRandom(1, "PRS");
   document.getElementById("user2").innerHTML = getImagePath(userChoice);;
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
   outcome = calculateWinner(userChoice + cpuChoice);
+  
+  highlightControlPanelItem("fill");
 
   userChoice === outcome
     ? (winningPlayer = userName)
@@ -124,6 +127,7 @@ function playGame() {
       break;
     default:
   }
+
   displayWinner(winningPlayer);
 }
 
@@ -155,10 +159,57 @@ function calculateWinner(opponents) {
   return winner;
 } 
 
+// Not used
+function controlPanelDisplay(cell) {
+  switch (cell) {
+    case "user-rock":
+      break;
+    case "user-paper":
+      break;
+    case "user-scissors":
+      break;
+    case "cpu-rock":
+      break;
+    case "cpu-paper":
+      break;
+    case "cpu-scissors":
+      break;
+  }
+  document.getElementsByName(cell).style.filter = "drop-shadow(5px 5px 10px darkslategray)";
+  document.getElementsByName(cell).style.backgroundColor = "greenyellow";      
+}
+
+
+function highlightControlPanelItem(clearOrFill) {
+  var userCP_Cell = `user-${getToolName(userChoice).toLowerCase()}`;  
+  var cpuCP_Cell = `cpu-${getToolName(cpuChoice).toLowerCase()}`;
+
+  switch (clearOrFill) {
+    case "clear":
+      document.getElementById(userCP_Cell).style.filter = "";
+      document.getElementById(userCP_Cell).style.backgroundColor = "#F4F4F4";
+      document.getElementById(cpuCP_Cell).style.filter = "";
+      document.getElementById(cpuCP_Cell).style.backgroundColor = "#F4F4F4";
+      clearCells();
+      break;
+
+    case "fill":
+      document.getElementById(userCP_Cell).style.filter =
+        "drop-shadow(5px 5px 10px darkslategray)";
+      document.getElementById(userCP_Cell).style.backgroundColor = "white";
+      document.getElementById(cpuCP_Cell).style.filter =
+        "drop-shadow(5px 5px 10px darkslategray)";
+      document.getElementById(cpuCP_Cell).style.backgroundColor = "white";
+      break;
+  }
+
+}
+
 function displayWinner(winner) {
   // Might use these var's below
   // var winningCell = "";
   // var losingCell = "";
+
   var resultCell = document.getElementById('result-cell');
   var user_NameCell =  document.getElementById('user-name');
   var cpuCell = document.getElementById('cpu');
@@ -167,7 +218,7 @@ function displayWinner(winner) {
   var comp1Cell = document.getElementById("comp1"); 
   var comp2Cell = document.getElementById("comp2");
   
-  switch (winner) {
+  switch (winner) {        
     case userName:
       ++userScore;
 
@@ -211,27 +262,70 @@ function displayWinner(winner) {
       break;
 
     default:
-      resultCell.style.backgroundColor = "#FFFFFF";
-      user_NameCell.style.backgroundColor = "darkslategray"; 
-      cpuCell.style.backgroundColor = "darkslategray";     
 
-      user1Cell.innerText = "";
-      user1Cell.style.backgroundColor = "#F4F4F4";
+    clearCells();
+      // resultCell.style.backgroundColor = "#FFFFFF";
+      // user_NameCell.style.backgroundColor = "darkslategray"; 
+      // cpuCell.style.backgroundColor = "darkslategray";     
 
-      user2Cell.style.backgroundColor = "#F4F4F4";
-      user2Cell.style.filter = "";
+      // user1Cell.innerText = "";
+      // user1Cell.style.backgroundColor = "#F4F4F4";
 
-      comp1Cell.innerText = "";
-      comp1Cell.style.backgroundColor = "#F4F4F4";
-      comp1Cell.style.backgroundColor = "#F4F4F4";
+      // user2Cell.style.backgroundColor = "#F4F4F4";
+      // user2Cell.style.filter = "";
 
-      comp2Cell.style.backgroundColor = "#F4F4F4";
-      comp2Cell.style.filter = "";    
+      // comp1Cell.innerText = "";
+      // comp1Cell.style.backgroundColor = "#F4F4F4";
+      // comp1Cell.style.backgroundColor = "#F4F4F4";
+
+      // comp2Cell.style.backgroundColor = "#F4F4F4";
+      // comp2Cell.style.filter = "";    
   }
   
   user_NameCell.innerText = `${userName}:  ${userScore}`;
   cpuCell.innerText = `${cpuName}:  ${cpuScore}`;
   updateLocal();  
+  setTimeout(highlightControlPanelItem, 3000, 'clear');
+  //setTimeout(clearCells, 3000);
+}
+
+function clearCells() {
+  var resultCell = document.getElementById('result-cell');
+  var user_NameCell =  document.getElementById('user-name');
+  var cpuCell = document.getElementById('cpu');
+  var user1Cell = document.getElementById("user1");
+  var user2Cell = document.getElementById("user2");
+  var comp1Cell = document.getElementById("comp1"); 
+  var comp2Cell = document.getElementById("comp2");
+
+  
+
+  resultCell.style.backgroundColor = "#FFFFFF";
+  // resultCell.innerHTML = "";
+  //resultCell.innerText = `${userName}: \n R = Rock \n P = Paper \n S = Scissors`;
+  
+  user_NameCell.style.backgroundColor = "darkslategray";
+  cpuCell.style.backgroundColor = "darkslategray";  
+
+  user1Cell.innerHTML = "";
+  user1Cell.innerText = "Play Again?";
+  user1Cell.style.backgroundColor = "#F4F4F4";
+
+  user2Cell.style.backgroundColor = "#F4F4F4";
+  user2Cell.style.filter = "";
+  user2Cell.innerHTML = "";
+  // user2Cell.innerText = "R = Rock \n P = Paper \n S = Scissors";
+  user2Cell.innerText = `${userName}:  \n ${userScore}`;
+  
+  comp1Cell.innerText = "";
+  comp1Cell.innerHTML = "";
+  comp1Cell.style.backgroundColor = "#F4F4F4";
+  comp1Cell.style.backgroundColor = "#F4F4F4";
+
+  comp2Cell.style.backgroundColor = "#F4F4F4";
+  comp2Cell.style.filter = "";
+  comp2Cell.innerHTML = "";  
+  comp2Cell.innerText = `${cpuName}: \n ${cpuScore}`;
 }
 
 function getToolName(id) {
