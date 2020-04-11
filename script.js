@@ -49,18 +49,19 @@ function controlPanelClickHandler(toolClicked) {
     case "user-rock":
     case "user-fist":
       userChoice = "R";
+      playGame();
       break;
     case "user-paper":
     case "user-wave":
       userChoice = "P";
+      playGame();
       break;
     case "user-scissors":
       userChoice = "S";
-      break;
-  }
-
-  if(userChoice !== !userChoice) {
-    playGame();
+      playGame();
+      break;  
+    default: 
+    locked = false;    
   }
 }
 
