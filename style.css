@@ -33,10 +33,10 @@ h3 {
     font-size: 22px;
     font-weight: bold;
     font-family: 'Courier New', Courier, monospace;
-    color: #fafad2;
+    color: #ffffff;
     text-align: center; 
     padding: 4px 4px;
-    text-shadow: -1px 0 darkslategray, 0 1px darkslategray, 1px 0 darkslategray, 0 -1px darkslategray;
+    text-shadow: -1px 0 darkslategray, 0 1px dodgerblue, 1px 0 darkslategray, 0 -1px darkslategray;
 }
 h4 {
     font-size: 18px;
@@ -70,6 +70,7 @@ h4 {
     border-radius: 7px;
 }
 .menu-text {
+    height: 22px;
     font-size: 18px;
     font-family: monospace;
     color: ghostwhite;
@@ -78,8 +79,10 @@ h4 {
     border-radius: 6px;
 }
 .menu-result-text {
+    height: 22px;
     font-size: 18px;
     font-family: monospace;
+    font-weight: bold;
     color: greenyellow;
     padding: 2px 2px;    
     text-align: center;
@@ -101,7 +104,7 @@ h4 {
 .main-cell > img {    
     width: 50px;
     height: 50px;
-    filter: drop-shadow(0 0 0.15rem rgb(213, 255, 150));
+    filter: drop-shadow(0 0 0.15rem greenyellow);
 }
 .game-cell {
     width: 100px;

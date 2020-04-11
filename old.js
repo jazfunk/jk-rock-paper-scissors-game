@@ -68,6 +68,25 @@
 
 
 
+// // Not used
+// function controlPanelDisplay(cell) {
+//       switch (cell) {
+//         case "user-rock":
+//           break;
+//         case "user-paper":
+//           break;
+//         case "user-scissors":
+//           break;
+//         case "cpu-rock":
+//           break;
+//         case "cpu-paper":
+//           break;
+//         case "cpu-scissors":
+//           break;
+//       }
+//       document.getElementsByName(cell).style.filter = "drop-shadow(5px 5px 10px darkslategray)";
+//       document.getElementsByName(cell).style.backgroundColor = "greenyellow";      
+//     }
 
 
 

@@ -3,9 +3,9 @@ const FIST_IMG = '<img id="fist-png" src="images/fist.png">';
 const ROCK_IMG = '<img id="rock-png" src="images/rock.png">';
 const PAPER_IMG = '<img id="paper-png" src="images/paper.png">';
 const SCISSORS_IMG = '<img id="scissors-png" src="images/scissors.png">';
-const EMPTY_IMG = '<img id="empty-png" src="images/scissors.png">';
-const DEFAULT_CELL_BG_COLOR = "#F4F4F4";
-const TIME_BETWEEN_ROUNDS = 1000;
+const EMPTY_IMG = '<img id="empty-png" src="images/empty.png">';
+const DEFAULT_CELL_COLOR = "#F4F4F4";
+const RESET_INTERVAL = 2500;
 const tool_ids = ['R', 'P', 'S'];
 var locked = false;
 var userName = '';
@@ -18,20 +18,13 @@ var outcome = '';
 var rule = '';
 var winningPlayer = '';
 
-// class Image {
-//   constructor(id, path) {
-//     this.id = id;
-//     this.path = path;
-//   }
-// }
-
 document
  .getElementById("clear-local")
  .addEventListener("click", function (e) {
    e.preventDefault();
    localStorage.clear();
    location.reload(true);
-});  
+ });  
 
 document
  .getElementById("page-action-btn")
@@ -47,27 +40,29 @@ document
    if(locked) {
      return;
    }
+   locked = true;
    controlPanelClickHandler(e.target.parentElement.id)
  });
 
- function controlPanelClickHandler(toolClicked) {   
+function controlPanelClickHandler(toolClicked) {
   switch (toolClicked) {
     case "user-rock":
     case "user-fist":
       userChoice = "R";
-      playGame();
       break;
     case "user-paper":
     case "user-wave":
       userChoice = "P";
-      playGame();
       break;
     case "user-scissors":
       userChoice = "S";
-      playGame();
-      break;       
+      break;
   }
- }
+
+  if(userChoice !== !userChoice) {
+    playGame();
+  }
+}
 
 document
  .addEventListener("keyup", keyUpHandler, false);
@@ -102,7 +97,6 @@ window.onload = function(e) {
 };
 
 function getUser() {
-
   getLocalStorage(); 
 
   if (userName === "" || userName === null) {
@@ -122,7 +116,7 @@ function getUser() {
   document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
 }
 
-// Convert these to obects, rather than individual items
+// Convert these to objects, rather than individual items
 function getLocalStorage() {
   userName = window.localStorage.getItem("userName");
   userScore = window.localStorage.getItem("userScore");
@@ -130,7 +124,7 @@ function getLocalStorage() {
   cpuScore = window.localStorage.getItem("cpuScore");
 }
 
-// Convert these to obects, rather than individual items
+// Convert these to objects, rather than individual items
 function updateLocalStorage() {
   if (userScore === "" || userScore === null) {
     userScore = 0;
@@ -143,6 +137,7 @@ function updateLocalStorage() {
 }
 
 function playGame() {
+  // introRoll();
   cpuChoice = getRandomRPS(1, "RPS");
   document.getElementById("user2").innerHTML = getImagePath(userChoice);;
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
@@ -158,29 +153,33 @@ function playGame() {
     case "R":
     case "P":
     case "S":
-      document
-        .getElementById('result-cell')
-        .innerHTML = `${getImagePath(outcome)}<br>${rule}`;  
-        
-      var currentWinnerArrowDirection = "";
+      var currentWinnerArrowDirection = ""; 
 
       winningPlayer === userName 
         ? currentWinnerArrowDirection = `<--- ${getToolName(outcome)} Wins!`
         : winningPlayer === cpuName 
           ? currentWinnerArrowDirection = `${getToolName(outcome)} Wins! --->`
-          : currentWinnerArrowDirection = ""; 
+          : currentWinnerArrowDirection = "";
+
+      document
+        .getElementById('result-cell')
+        .innerHTML = `${getImagePath(outcome)}<br>${rule}`;
 
       document
         .getElementById('menu-result')
         .innerText = currentWinnerArrowDirection;
+
       break;
+      
     case "TIE":
       document
         .getElementById('result-cell')
-        .innerText = `Tie Game \n -${getToolName(userChoice)}-`;
+        .innerText = `Tie Game \n -${getToolName(userChoice)}- \n Play Again`;
+
       document
         .getElementById('menu-result')
         .innerText = "Push";
+
       break;
   }  
   displayWinner(winningPlayer);
@@ -238,11 +237,12 @@ function displayWinner(winner) {
       user2Cell.style.backgroundColor = "greenyellow";
 
       comp1Cell.innerText = `${getToolName(cpuChoice)} \n Loses`;
-      comp1Cell.style.filter = "";
-      comp1Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
+      comp1Cell.style.filter = "none";
+      comp1Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
 
-      comp2Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
+      comp2Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
       comp2Cell.style.filter = "blur(3px)";
+
       break;
 
     case cpuName:
@@ -259,11 +259,12 @@ function displayWinner(winner) {
       comp2Cell.style.backgroundColor = "greenyellow";
 
       user1Cell.innerText = `${getToolName(userChoice)} \n Loses`;
-      user1Cell.style.filter = "";
+      user1Cell.style.filter = "none";
       user1Cell.style.backgroundColor = "DEFAULT_CELL_BG_COLOR";
 
-      user2Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
-      user2Cell.style.filter = "blur(1px)";
+      user2Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
+      user2Cell.style.filter = "blur(3px)";
+
       break;
 
     default:
@@ -280,7 +281,7 @@ function displayWinner(winner) {
   setTimeout(function () {
     highlightControlPanelItems("clear");
     locked = false;
-  }, TIME_BETWEEN_ROUNDS);
+  }, RESET_INTERVAL);
 }
 
 function highlightControlPanelItems(clearOrFill) {
@@ -288,17 +289,20 @@ function highlightControlPanelItems(clearOrFill) {
 
   var userCP_Cell = `user-${getToolName(userChoice).toLowerCase()}`;
   var cpuCP_Cell = `cpu-${getToolName(cpuChoice).toLowerCase()}`;
-  var winningDecoration = "drop-shadow(5px 3px 10px darkslategray) drop-shadow(-5px 3px 10px dodgerblue)";
-  var losingDecoration = "drop-shadow(5px 3px 10px darkslategray)";
+  var winningDecoration = 
+    "drop-shadow(5px 3px 10px greenyellow) drop-shadow(-5px 3px 10px dodgerblue)";
+  var losingDecoration = 
+    "drop-shadow(5px 3px 10px darkslategray)";
 
   switch (clearOrFill) {
     case "clear":
-      document.getElementById(userCP_Cell).style.filter = "";
-      document.getElementById(userCP_Cell).style.backgroundColor = DEFAULT_CELL_BG_COLOR;
-      document.getElementById(cpuCP_Cell).style.filter = "";
-      document.getElementById(cpuCP_Cell).style.backgroundColor = DEFAULT_CELL_BG_COLOR;
+      document.getElementById(userCP_Cell).style.filter = "none";
+      document.getElementById(userCP_Cell).style.backgroundColor = DEFAULT_CELL_COLOR;
+      document.getElementById(cpuCP_Cell).style.filter = "none";
+      document.getElementById(cpuCP_Cell).style.backgroundColor = DEFAULT_CELL_COLOR;
 
-      clearCells();      
+      clearCells();  
+
       break;
 
     case "fill":
@@ -307,20 +311,23 @@ function highlightControlPanelItems(clearOrFill) {
           document.getElementById(userCP_Cell).style.filter = winningDecoration;
           document.getElementById(cpuCP_Cell).style.filter = losingDecoration;
           document.getElementById(userCP_Cell).style.backgroundColor = "#FFFFFF";
+
           break;
 
         case cpuName:
           document.getElementById(userCP_Cell).style.filter = losingDecoration;
           document.getElementById(cpuCP_Cell).style.filter = winningDecoration;
           document.getElementById(cpuCP_Cell).style.backgroundColor = "#FFFFFF";
+
           break;
           
         default:
           document.getElementById(userCP_Cell).style.filter = losingDecoration;
           document.getElementById(cpuCP_Cell).style.filter = losingDecoration;   
-          document.getElementById(userCP_Cell).style.backgroundColor = DEFAULT_CELL_BG_COLOR;
-          document.getElementById(cpuCP_Cell).style.backgroundColor = DEFAULT_CELL_BG_COLOR;
+          document.getElementById(userCP_Cell).style.backgroundColor = DEFAULT_CELL_COLOR;
+          document.getElementById(cpuCP_Cell).style.backgroundColor = DEFAULT_CELL_COLOR;
       }
+
       break;
   }
 }
@@ -340,21 +347,21 @@ function clearCells() {
   cpuCell.style.backgroundColor = "darkslategray";
 
   user1Cell.innerHTML = "";
-  user1Cell.innerText = "Play Again?";
-  user1Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
+  user1Cell.innerText = "Play \n Again?";
+  user1Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
 
-  user2Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
-  user2Cell.style.filter = "";
+  user2Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
+  user2Cell.style.filter = "none";
   user2Cell.innerHTML = "";
-  user2Cell.innerText = `${userName}:  \n ${userScore}`;
+  user2Cell.innerText = `${userName}: \n ${userScore}`;
 
   comp1Cell.innerHTML = "";
-  comp1Cell.innerText = "";
-  comp1Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
-  comp1Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
+  comp1Cell.innerText = "Play \n Again?";
+  comp1Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
+  comp1Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
 
-  comp2Cell.style.backgroundColor = DEFAULT_CELL_BG_COLOR;
-  comp2Cell.style.filter = "";
+  comp2Cell.style.backgroundColor = DEFAULT_CELL_COLOR;
+  comp2Cell.style.filter = "none";
   comp2Cell.innerHTML = "";
   comp2Cell.innerText = `${cpuName}: \n ${cpuScore}`;
 }
@@ -396,8 +403,6 @@ function getToolName(id) {
   return toolName;
 }
 
-// This is the only one I could get working
-// And I really don't fully understand it.
 function getRandomRPS(length, chars) {
   var result = "";
   for (var i = length; i > 0; --i)
@@ -405,84 +410,58 @@ function getRandomRPS(length, chars) {
   return result;
 }
 
-
-
-
-
-// Psuedo Code //
-// ----------- //
-// Develop "Roll"
-// Flash between fist.png and rock.png three times
-// ^--Depicting "Rock! Paper! Scissors!"
-// On the third roll, display userChoice and cpuChoice
-
-
-
-
-
 // Roll 3 times, Rock!...Paper!...Scissors!
-function introRoll() {   
-  document.getElementById('user1').innerHTML = FIST_IMG;
-  document.getElementById('comp1').innerHTML =  FIST_IMG;
-  document.getElementById("result-cell").innerText = "";
+function introRoll(play) {
+  document.getElementById("user1").innerHTML = "";
+  document.getElementById("user2").innerHTML = ROCK_IMG;
+  document.getElementById("user2").style.verticalAlign = "top";
+  document.getElementById("comp1").innerHTML = "";
+  document.getElementById("comp2").innerHTML = ROCK_IMG;
+  document.getElementById("comp2").style.verticalAlign = "top";
+  document.getElementById("result-cell").innerText = "ROCK!";
+  document.getElementById("result-cell").style.verticalAlign = "top";
+  // setTimeout(function () {
+  //   document.getElementById("user1").innerHTML = "";
+  //   document.getElementById("user2").innerHTML = ROCK_IMG;
+  //   document.getElementById("user2").style.verticalAlign = "top";
+  //   document.getElementById("comp1").innerHTML = "";
+  //   document.getElementById("comp2").innerHTML = ROCK_IMG;
+  //   document.getElementById("comp2").style.verticalAlign = "top";
+  //   document.getElementById("result-cell").innerText = "ROCK!";
+  //   document.getElementById("result-cell").style.verticalAlign = "top";
+  // }, 300);
 
-    setTimeout(function() {
-      document.getElementById('user1').innerHTML = "";
-      document.getElementById('user2').innerHTML = ROCK_IMG;
-      document.getElementById('comp1').innerHTML = "";
-      document.getElementById('comp2').innerHTML = ROCK_IMG;
-      document.getElementById("result-cell").innerText = "ROCK! PAPER! SCISSORS!";
-    }, 500);
+  setTimeout(function () {
+    document.getElementById("user1").innerHTML = "";
+    document.getElementById("user2").innerHTML = PAPER_IMG;
+    document.getElementById("user2").style.verticalAlign = "middle";
+    document.getElementById("comp1").innerHTML = "";
+    document.getElementById("comp2").innerHTML = PAPER_IMG;
+    document.getElementById("comp2").style.verticalAlign = "middle";
+    document.getElementById("result-cell").innerText = "PAPER!";
+    document.getElementById("result-cell").style.verticalAlign = "middle";
+  }, 500);
 
-    setTimeout(function() {
-      document.getElementById('user1').innerHTML = "";
-      document.getElementById('user2').innerHTML = "";
-      document.getElementById('comp1').innerHTML = "";
-      document.getElementById('comp2').innerHTML = "";
-      //document.getElementById('menu-result').innerText = "Press A Key to Play";
-      document.getElementById('result-cell').innerText = 
-        `${userName} \n Press \n R, P, or S \n To Play`;
-    }, 2200);
+  setTimeout(function () {
+    document.getElementById("user1").innerHTML = "";
+    document.getElementById("user2").innerHTML = SCISSORS_IMG;
+    document.getElementById("user2").style.verticalAlign = "bottom";
+    document.getElementById("comp1").innerHTML = "";
+    document.getElementById("comp2").innerHTML = SCISSORS_IMG;
+    document.getElementById("comp2").style.verticalAlign = "bottom";
+    document.getElementById("result-cell").innerText = "SCISSORS!";
+    document.getElementById("result-cell").style.verticalAlign = "bottom";
+  }, 1000);
 
-  // for (t in tool_ids) {
-  //   document.getElementById(cell).innerHTML = FIST_IMG;
-  //   setTimeout(function() {
-  //     document.getElementById(cell).innerHTML = ROCK_IMG;
-  //     document.getElementById("result-cell").innerText =
-  //       getToolName(tool_ids[t]) + "!";
-  //   }, 1000);
-  // }
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// Not used
-function controlPanelDisplay(cell) {
-  switch (cell) {
-    case "user-rock":
-      break;
-    case "user-paper":
-      break;
-    case "user-scissors":
-      break;
-    case "cpu-rock":
-      break;
-    case "cpu-paper":
-      break;
-    case "cpu-scissors":
-      break;
-  }
-  document.getElementsByName(cell).style.filter = "drop-shadow(5px 5px 10px darkslategray)";
-  document.getElementsByName(cell).style.backgroundColor = "greenyellow";      
+  setTimeout(function () {
+    document.getElementById("user1").innerHTML = "";
+    document.getElementById("user2").innerHTML = "";
+    document.getElementById("user2").style.verticalAlign = "";
+    document.getElementById("comp1").innerHTML = "";
+    document.getElementById("comp2").innerHTML = "";
+    document.getElementById("comp2").style.verticalAlign = "";
+    document.getElementById("result-cell").style.verticalAlign = "";
+    document.getElementById("result-cell").innerText = "";
+    document.getElementById("result-cell").innerText = `${userName} \n Press \n R, P, or S \n or Click Below \n To Play`;
+  }, 1500);
 }
