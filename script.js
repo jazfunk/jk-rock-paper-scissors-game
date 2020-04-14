@@ -65,8 +65,7 @@ function controlPanelClickHandler(toolClicked) {
   }
 }
 
-document
- .addEventListener("keyup", keyUpHandler, false);
+document.addEventListener("keyup", keyUpHandler, false);
 
 function keyUpHandler(e) {
   if(locked) {
@@ -117,7 +116,6 @@ function getUser() {
   document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
 }
 
-// Convert these to objects, rather than individual items
 function getLocalStorage() {
   userName = window.localStorage.getItem("userName");
   userScore = window.localStorage.getItem("userScore");
@@ -125,7 +123,6 @@ function getLocalStorage() {
   cpuScore = window.localStorage.getItem("cpuScore");
 }
 
-// Convert these to objects, rather than individual items
 function updateLocalStorage() {
   if (userScore === "" || userScore === null) {
     userScore = 0;
@@ -138,10 +135,10 @@ function updateLocalStorage() {
 }
 
 function playGame() {
-  // introRoll();
   cpuChoice = getRandomRPS(1, "RPS");
   document.getElementById("user2").innerHTML = getImagePath(userChoice);;
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
+  
   outcome = calculateWinner(userChoice + cpuChoice);
   
   highlightControlPanelItems("fill");
@@ -290,10 +287,8 @@ function highlightControlPanelItems(clearOrFill) {
 
   var userCP_Cell = `user-${getToolName(userChoice).toLowerCase()}`;
   var cpuCP_Cell = `cpu-${getToolName(cpuChoice).toLowerCase()}`;
-  var winningDecoration = 
-    "drop-shadow(5px 3px 10px greenyellow) drop-shadow(-5px 3px 10px dodgerblue)";
-  var losingDecoration = 
-    "drop-shadow(5px 3px 10px darkslategray)";
+  var winningDecoration = "drop-shadow(5px 3px 10px greenyellow) drop-shadow(-5px 3px 10px dodgerblue)";
+  var losingDecoration = "drop-shadow(5px 3px 10px darkslategray)";
 
   switch (clearOrFill) {
     case "clear":
@@ -411,7 +406,6 @@ function getRandomRPS(length, chars) {
   return result;
 }
 
-// Roll 3 times, Rock!...Paper!...Scissors!
 function introRoll(play) {
   document.getElementById("user1").innerHTML = "";
   document.getElementById("user2").innerHTML = ROCK_IMG;
@@ -421,16 +415,6 @@ function introRoll(play) {
   document.getElementById("comp2").style.verticalAlign = "top";
   document.getElementById("result-cell").innerText = "ROCK!";
   document.getElementById("result-cell").style.verticalAlign = "top";
-  // setTimeout(function () {
-  //   document.getElementById("user1").innerHTML = "";
-  //   document.getElementById("user2").innerHTML = ROCK_IMG;
-  //   document.getElementById("user2").style.verticalAlign = "top";
-  //   document.getElementById("comp1").innerHTML = "";
-  //   document.getElementById("comp2").innerHTML = ROCK_IMG;
-  //   document.getElementById("comp2").style.verticalAlign = "top";
-  //   document.getElementById("result-cell").innerText = "ROCK!";
-  //   document.getElementById("result-cell").style.verticalAlign = "top";
-  // }, 300);
 
   setTimeout(function () {
     document.getElementById("user1").innerHTML = "";
