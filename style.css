@@ -2,6 +2,9 @@
     margin: 0 auto;
     padding: 0px;
 }
+.clickable:hover {
+    cursor: pointer;
+}
 body {    
     background: #e2e2e2;
     
