@@ -174,17 +174,17 @@ function playGame(userChoice) {
 
 function calculateWinner(userChoice, cpuChoice) {
   if (userChoice === cpuChoice) {
-    return 'TIE';
+    return "TIE";
   }
 
-  const rockBeatsScissors = userChoice === 'R' && cpuChoice === 'S';
-  const scissorsBeatsPaper = userChoice === 'S' && cpuChoice === 'P';
-  const paperBeatsRock = userChoice === 'P' && cpuChoice === 'R';
+  const rockBeatsScissors = userChoice === "R" && cpuChoice === "S";
+  const scissorsBeatsPaper = userChoice === "S" && cpuChoice === "P";
+  const paperBeatsRock = userChoice === "P" && cpuChoice === "R";
   if (rockBeatsScissors || scissorsBeatsPaper || paperBeatsRock) {
-    return 'WIN';
+    return "WIN";
   }
-
-  return 'LOSE';
+  
+  return "LOSE";
 }
 
 function displayWinner(outcome, userChoice, cpuChoice) {
