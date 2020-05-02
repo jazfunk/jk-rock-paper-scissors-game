@@ -155,18 +155,21 @@ function getRule(outcome, userChoice, cpuChoice) {
 
 function playGame(userChoice) {
   const cpuChoice = getRandomComputerChoice();
+  const outcome = calculateWinner(userChoice, cpuChoice);
+  const rule = getRule(outcome, userChoice, cpuChoice);
+
   document.getElementById("user2").innerHTML = getImagePath(userChoice);;
   document.getElementById("comp2").innerHTML = getImagePath(cpuChoice);
 
-  const outcome = calculateWinner(userChoice, cpuChoice);
-
   highlightControlPanelItems("fill", cpuChoice, outcome, userChoice);
-
-  const rule = getRule(outcome, userChoice, cpuChoice);
 
   displayWinnerArrow(outcome, rule, userChoice, cpuChoice)
 
   displayWinner(outcome, userChoice, cpuChoice);
+
+  displayScore();
+  
+  updateLocalStorage();
 }
 
 function calculateWinner(userChoice, cpuChoice) {
@@ -242,19 +245,13 @@ function displayWinner(outcome, userChoice, cpuChoice) {
       clearCells();
   }
 
-  highlightControlPanelItems("fill", cpuChoice, outcome, userChoice);
-
-  displayScore();
-
-  updateLocalStorage();
-
   setTimeout(function () {
     highlightControlPanelItems("clear", cpuChoice, outcome, userChoice);
     locked = false;
   }, RESET_INTERVAL);
 }
 
-let displayScore = () => {
+const displayScore = () => {
   document.getElementById("user-name").innerText = `${userName}:  ${userScore}`;
   document.getElementById("cpu").innerText = `${cpuName}:  ${cpuScore}`;
 }
@@ -353,22 +350,18 @@ function getImagePath(id) {
 }
 
 function getToolName(id) {
-  let toolName = "";
   switch (id) {
     case "R":
-      toolName = "Rock";
-      break;
+      return "Rock";
     case "P":
-      toolName = "Paper";
-      break;
+      return "Paper";
     case "S":
-      toolName = "Scissors";
-      break;
+      return "Scissors";
     case "TIE":
-      toolName = "Tie";
-      break;
+      return "Tie";
+    default:
+      return "";
   }
-  return toolName;
 }
 
 function getRandomComputerChoice() {
