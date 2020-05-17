@@ -146,7 +146,7 @@ function getRule(outcome, userChoice, cpuChoice) {
       case 'P':
         return "Paper Covers Rock";
       case 'R':
-        return "Rock Smashes Scissors";
+        return "Rock Crushes Scissors";
       case 'S':
         return "Scissors Cuts Paper";
     }
